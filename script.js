@@ -195,18 +195,9 @@ function spinWheel() {
     const maxRotations = 8;
     const rotations = minRotations + Math.random() * (maxRotations - minRotations);
 
-    // Calculate target slice (random winner)
-    const sliceAngle = (2 * Math.PI) / participants.length;
-    const winnerIndex = Math.floor(Math.random() * participants.length);
-    selectedWinner = participants[winnerIndex];
-
-    // Calculate exact rotation to land on winner (pointer is at top, pointing down)
-    // The wheel rotates clockwise, and slice 0 starts at angle 0 (3 o'clock position)
-    // Pointer is at top (270 degrees or -PI/2), so we need to align the winner slice middle with that
-    const winnerSliceMiddle = winnerIndex * sliceAngle + sliceAngle / 2;
-    const pointerAngle = -Math.PI / 2; // Top position
-    const angleToWinner = pointerAngle - winnerSliceMiddle;
-    targetRotation = currentRotation + (rotations * 2 * Math.PI) - angleToWinner;
+    // Add random angle between 0 and 2π for final position
+    const randomAngle = Math.random() * 2 * Math.PI;
+    targetRotation = currentRotation + (rotations * 2 * Math.PI) + randomAngle;
 
     spinSpeed = 0.5; // Initial speed
     animateSpin();
@@ -226,6 +217,28 @@ function animateSpin() {
         currentRotation = targetRotation % (2 * Math.PI);
         drawWheel();
         spinning = false;
+
+        // Calculate winner based on where the pointer is pointing
+        // Pointer is at top (270° = -π/2 from positive x-axis)
+        // We need to find which slice the pointer is in after rotation
+        const sliceAngle = (2 * Math.PI) / participants.length;
+
+        // The pointer is at angle -π/2 in world space
+        // After rotating the wheel by currentRotation, we need to find which slice is under the pointer
+        // A slice i occupies angles from i*sliceAngle to (i+1)*sliceAngle in the wheel's local space
+        // In world space, these become: i*sliceAngle + currentRotation to (i+1)*sliceAngle + currentRotation
+        // The pointer is at -π/2, so we need: i*sliceAngle + currentRotation <= -π/2 < (i+1)*sliceAngle + currentRotation
+        // Solving: i*sliceAngle <= -π/2 - currentRotation < (i+1)*sliceAngle
+
+        const pointerAngle = -Math.PI / 2; // Top position
+        let angleUnderPointer = pointerAngle - currentRotation;
+
+        // Normalize to [0, 2π)
+        angleUnderPointer = ((angleUnderPointer % (2 * Math.PI)) + (2 * Math.PI)) % (2 * Math.PI);
+
+        // Find which slice this angle belongs to
+        const winnerIndex = Math.floor(angleUnderPointer / sliceAngle);
+        selectedWinner = participants[winnerIndex];
 
         // Show confetti and certificate
         setTimeout(() => {
