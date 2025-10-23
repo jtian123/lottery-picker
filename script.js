@@ -200,9 +200,13 @@ function spinWheel() {
     const winnerIndex = Math.floor(Math.random() * participants.length);
     selectedWinner = participants[winnerIndex];
 
-    // Calculate exact rotation to land on winner (pointer is at top)
+    // Calculate exact rotation to land on winner (pointer is at top, pointing down)
+    // The wheel rotates clockwise, and slice 0 starts at angle 0 (3 o'clock position)
+    // Pointer is at top (270 degrees or -PI/2), so we need to align the winner slice middle with that
     const winnerSliceMiddle = winnerIndex * sliceAngle + sliceAngle / 2;
-    targetRotation = currentRotation + (rotations * 2 * Math.PI) + (2 * Math.PI - winnerSliceMiddle);
+    const pointerAngle = -Math.PI / 2; // Top position
+    const angleToWinner = pointerAngle - winnerSliceMiddle;
+    targetRotation = currentRotation + (rotations * 2 * Math.PI) - angleToWinner;
 
     spinSpeed = 0.5; // Initial speed
     animateSpin();
