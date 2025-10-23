@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apateu Giveaway - Lottery Picker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background animated gradient -->
+    <div class="gradient-bg"></div>
+
+    <!-- Logo Section -->
+    <div class="logo-container">
+        <img src="logo.png" alt="Apateu Logo" id="logo" style="display: none;">
+        <h1 class="logo-text">APATEU</h1>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Input Section -->
+        <div class="input-section" id="inputSection">
+            <div class="card">
+                <h1 class="title">🎉 Giveaway Lottery Picker</h1>
+                <p class="subtitle">The All-in-One Platform for Subleasing and Student Marketplace, Powered by AI</p>
+
+                <div class="input-group">
+                    <label for="nameInput">Enter Participant Names</label>
+                    <textarea
+                        id="nameInput"
+                        placeholder="Enter names (one per line or comma-separated)&#10;Example:&#10;John Smith&#10;Jane Doe&#10;Mike Johnson"
+                        rows="10"
+                    ></textarea>
+                    <div class="participant-count">
+                        Participants: <span id="participantCount">0</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" id="startBtn" onclick="startLottery()">
+                    Start Lottery Draw 🎯
+                </button>
+            </div>
+        </div>
+
+        <!-- Wheel Section -->
+        <div class="wheel-section" id="wheelSection" style="display: none;">
+            <div class="card wheel-card">
+                <h2 class="wheel-title">Drawing Winner...</h2>
+
+                <!-- Random Seed Display for Transparency -->
+                <div class="seed-display">
+                    <p>🔒 Random Seed: <span id="randomSeed"></span></p>
+                    <p>📊 Total Participants: <span id="totalParticipants"></span></p>
+                </div>
+
+                <!-- Spinning Wheel Container -->
+                <div class="wheel-container">
+                    <div class="wheel-pointer">▼</div>
+                    <canvas id="wheelCanvas" width="500" height="500"></canvas>
+                </div>
+
+                <button class="btn btn-spin" id="spinBtn" onclick="spinWheel()">
+                    SPIN THE WHEEL 🎰
+                </button>
+
+                <button class="btn btn-secondary" id="backBtn" onclick="goBack()" style="margin-top: 15px;">
+                    ← Back to Input
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Confetti Container -->
+    <div id="confettiContainer"></div>
+
+    <!-- Certificate Modal -->
+    <div class="modal" id="certificateModal">
+        <div class="modal-content certificate">
+            <div class="certificate-header">
+                <h1>OFFICIAL WINNER CERTIFICATE</h1>
+                <div class="certificate-logo">APATEU LLC</div>
+            </div>
+
+            <div class="certificate-body">
+                <div class="winner-announcement">
+                    🎊 CONGRATULATIONS 🎊
+                </div>
+
+                <div class="winner-name" id="winnerName">WINNER NAME</div>
+
+                <div class="certificate-text">
+                    This certifies that the above individual has been randomly selected as the winner
+                    of the Apateu Giveaway through a transparent and verifiable lottery process.
+                </div>
+
+                <div class="certificate-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Event:</span>
+                        <span class="detail-value">Apateu Giveaway Draw</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Date & Time:</span>
+                        <span class="detail-value" id="drawDate"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Total Participants:</span>
+                        <span class="detail-value" id="certParticipants"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Random Seed:</span>
+                        <span class="detail-value" id="certSeed"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Verification Hash:</span>
+                        <span class="detail-value hash" id="verificationHash"></span>
+                    </div>
+                </div>
+
+                <div class="certificate-footer">
+                    <div class="company-info">
+                        <strong>Apateu LLC</strong>
+                        <p>The All-in-One Platform for Subleasing and Student Marketplace, Powered by AI</p>
+                    </div>
+                    <div class="signature-line">
+                        <div class="signature">Verified by Cryptographic Hash</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-download" onclick="downloadCertificate()">
+                    📥 Download Certificate
+                </button>
+                <button class="btn btn-secondary" onclick="closeModal()">
+                    Close
+                </button>
+                <button class="btn btn-primary" onclick="resetLottery()">
+                    🔄 New Draw
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

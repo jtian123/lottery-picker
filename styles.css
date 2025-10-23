@@ -1,0 +1,593 @@
+/* ===== RESET & BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    color: white;
+}
+
+/* ===== ANIMATED GRADIENT BACKGROUND ===== */
+.gradient-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #dc2430 75%, #7b4397 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== LOGO SECTION ===== */
+.logo-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#logo {
+    max-width: 50px;
+    height: auto;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: 800;
+    color: white;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 20px 40px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== GLASS CARD EFFECT ===== */
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== INPUT SECTION ===== */
+.input-section {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 15px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #ffffff, #ffd6d6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 35px;
+    opacity: 0.95;
+    line-height: 1.5;
+}
+
+.input-group {
+    margin-bottom: 30px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#nameInput {
+    width: 100%;
+    padding: 18px;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    font-size: 16px;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+#nameInput::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#nameInput:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.participant-count {
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: right;
+    color: #ffd6d6;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#participantCount {
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    padding: 18px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    display: block;
+    width: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #dc2430, #7b4397);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(220, 36, 48, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px);
+}
+
+.btn-spin {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    color: white;
+    animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.btn-spin:hover {
+    animation: none;
+    transform: scale(1.08);
+    box-shadow: 0 12px 40px rgba(245, 87, 108, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+}
+
+.btn-download {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.btn-download:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+}
+
+/* ===== WHEEL SECTION ===== */
+.wheel-section {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.wheel-card {
+    text-align: center;
+}
+
+.wheel-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 25px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.seed-display {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    line-height: 1.8;
+    backdrop-filter: blur(10px);
+}
+
+.seed-display p {
+    margin: 5px 0;
+}
+
+/* ===== SPINNING WHEEL ===== */
+.wheel-container {
+    position: relative;
+    display: inline-block;
+    margin: 30px auto;
+}
+
+.wheel-pointer {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 48px;
+    color: #fff;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    animation: pointerBounce 1s ease infinite;
+}
+
+@keyframes pointerBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+#wheelCanvas {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 10px rgba(255, 255, 255, 0.2),
+                0 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* ===== CONFETTI ===== */
+#confettiContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #f0f;
+    animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ===== MODAL ===== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.modal-content {
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modalSlideIn 0.5s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ===== CERTIFICATE DESIGN ===== */
+.certificate {
+    color: #333;
+}
+
+.certificate-header {
+    background: linear-gradient(135deg, #667eea, #764ba2, #dc2430);
+    padding: 40px;
+    text-align: center;
+    position: relative;
+}
+
+.certificate-header h1 {
+    font-size: 32px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 3px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.certificate-logo {
+    margin-top: 15px;
+    font-size: 28px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 2px;
+}
+
+.certificate-body {
+    padding: 50px 40px;
+    background: linear-gradient(to bottom, #fff, #f8f9ff);
+}
+
+.winner-announcement {
+    font-size: 28px;
+    font-weight: 800;
+    color: #dc2430;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.winner-name {
+    font-size: 48px;
+    font-weight: 900;
+    text-align: center;
+    color: #667eea;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.certificate-text {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.certificate-details {
+    background: rgba(102, 126, 234, 0.05);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    margin-bottom: 40px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 700;
+    color: #333;
+}
+
+.detail-value {
+    color: #666;
+    text-align: right;
+    max-width: 60%;
+}
+
+.detail-value.hash {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    word-break: break-all;
+}
+
+.certificate-footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.company-info strong {
+    font-size: 20px;
+    color: #dc2430;
+}
+
+.company-info p {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #777;
+    font-style: italic;
+}
+
+.signature-line {
+    margin-top: 30px;
+}
+
+.signature {
+    display: inline-block;
+    padding: 15px 30px;
+    border: 2px solid #667eea;
+    border-radius: 10px;
+    font-style: italic;
+    color: #667eea;
+    font-weight: 600;
+}
+
+.modal-actions {
+    padding: 30px;
+    background: #f8f9ff;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.modal-actions .btn {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 80px 15px 30px;
+    }
+
+    .logo-text {
+        font-size: 20px;
+    }
+
+    .card {
+        padding: 25px;
+        border-radius: 20px;
+    }
+
+    .title {
+        font-size: 32px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .wheel-title {
+        font-size: 28px;
+    }
+
+    .winner-name {
+        font-size: 36px;
+    }
+
+    .certificate-header h1 {
+        font-size: 24px;
+    }
+
+    .certificate-body {
+        padding: 30px 20px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+
+    .modal-actions .btn {
+        width: 100%;
+    }
+
+    .detail-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .detail-value {
+        text-align: left;
+        max-width: 100%;
+    }
+
+    #wheelCanvas {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .btn {
+        padding: 15px 30px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 26px;
+    }
+
+    .winner-name {
+        font-size: 28px;
+    }
+
+    .certificate-header h1 {
+        font-size: 20px;
+    }
+
+    #wheelCanvas {
+        max-width: 280px;
+    }
+}
